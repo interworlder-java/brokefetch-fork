@@ -1340,25 +1340,33 @@ line18="${COLOR}${ascii18}"
 line19="${COLOR}${ascii19}"
 line20="${BOLD}BROKEFETCH 🥀 1.7${RESET}"
 
+<<<<<<< HEAD
 for i in $(seq -w 0 20); do
     varname="line$i"
     line="${!varname}"
     width="$(tput cols)"
+=======
+for i in $(seq 0 20); do    
+    num=$(printf "%02d" "$i")
+    varname="line$num"
+    line="${!varname:-}"   
+    width="${COLUMNS:-80}" 
+>>>>>>> 40b13b5288d468ddc2988e212181ec297f769028
 
-    echo -e "${line}" | awk -v w="$width" '
+    echo -e "$line" | awk -v w="$width" '
     {
-      out = ""; vis = 0;
+      out=""; vis=0
       while (length($0) > 0 && vis < w) {
-        if (match($0, /^\x1b\[[0-9;]*[A-Za-z]/)) {
-          out = out substr($0, 1, RLENGTH);
-          $0 = substr($0, RLENGTH+1);
+        if (match($0,/^\x1b\[[0-9;]*[A-Za-z]/)) {
+          out = out substr($0,1,RLENGTH)
+          $0 = substr($0,RLENGTH+1)
         } else {
-          ch = substr($0, 1, 1);
-          out = out ch;
-          $0 = substr($0, 2);
-          vis++;
+          ch = substr($0,1,1)
+          out = out ch
+          $0 = substr($0,2)
+          vis++
         }
       }
-      print out;
+      print out
     }'
 done
