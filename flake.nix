@@ -19,6 +19,7 @@
 
         buildInputs = [
           pkgs.bash
+          pkgs.ncurses
         ];
 
         installPhase = ''
@@ -36,6 +37,7 @@
 
         buildInputs = [
           pkgs.bash
+          pkgs.ncurses
         ];
 
         installPhase = ''

@@ -1343,7 +1343,7 @@ line20="${BOLD}BROKEFETCH 🥀 1.7${RESET}"
 for i in $(seq -w 0 20); do
     varname="line$i"
     line="${!varname}"
-    width="$COLUMNS"
+    width="$(tput cols)"
 
     echo -e "${line}" | awk -v w="$width" '
     {
